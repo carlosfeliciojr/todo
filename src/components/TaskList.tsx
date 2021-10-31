@@ -25,6 +25,7 @@ export function TaskList() {
         isComplete: false,
       }
       setTasks([...tasks, newTask])
+      setNewTaskTitle('')
     }
   }
 
@@ -41,11 +42,15 @@ export function TaskList() {
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
-    const indexToRemove = tasks.findIndex((task, index) => {
-      task.id === id
+    const newTasks: Task[] = []
+
+    tasks.forEach((task) => {
+      if (task.id !== id) {
+        newTasks.push(task)
+      }
     })
 
-    setTasks(tasks.splice(indexToRemove, indexToRemove))
+    setTasks(newTasks)
   }
 
   return (
